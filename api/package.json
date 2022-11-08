@@ -1,7 +1,6 @@
 {
   "name": "curso-avanzado-graphql-server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "deploy": "now -t <tu-token>",
@@ -24,5 +23,6 @@
   },
   "devDependencies": {
     "nodemon": "1.19.0"
-  }
+  },
+  "description": ""
 }
