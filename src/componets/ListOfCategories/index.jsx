@@ -4,12 +4,12 @@ import { Item, List } from "./styles";
 import { categories as mockCtegories } from "../../../api/db.json";
 
 export const ListOfCategories = () => {
-  const [categories, setCategories] = useState(mockCtegories)
+  const [categories, setCategories] = useState([])
 
   const getCategories = async () => {
-    const response = await fetch("https://rickandmortyapi.com/api/character");
+    const response = await fetch("https://social-app-snowy.vercel.app/categories");
     const data = await response.json();
-    getCategories(data.results);
+    setCategories(data.results);
   };
 
   useEffect(() => {
