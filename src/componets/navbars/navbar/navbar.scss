@@ -1,0 +1,74 @@
+@import "../../../styles/themes.scss";
+
+.navbar {
+  @include themify($themes) {
+    background-color: themed("bg");
+    color: themed("textColor");
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    height: 50px;
+    border-bottom: 1px solid lightgrey;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+
+    .left {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 30px;
+
+      @include tablet{
+        gap: 15px;
+        margin-right: 20px;
+      }
+
+      .logo {
+        font-size: 20px;
+        font-weight: bold;
+        color: themed("logo");
+      }
+      .search {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid themed("border");
+        border-radius: 5px;
+        padding: 5px;
+
+        input {
+          border: none;
+          width: 500px;
+          background-color: transparent;
+          color: themed("textColor");
+          outline: none;
+
+          @include mobile{
+            display: none;
+          }
+          @include tablet{
+            width: 150px;
+          }
+        }
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: themed("textColor");
+      
+      @include mobile{
+        display: none;
+      }
+
+      .user{
+        @include tablet{
+          display: none;
+        }
+      }
+    }
+  }
+}
