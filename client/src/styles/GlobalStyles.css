@@ -74,6 +74,13 @@ button {
   border: none;
 }
 
+.button__primary-small{
+  background-color: rebeccapurple;
+  padding: 7px 10px;
+  border-radius: 5px;
+  color: white;
+}
+
 button:hover {}
 
 button:focus,

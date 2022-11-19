@@ -2,46 +2,64 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Comments } from "../comments/Comments";
 import "./post.scss";
+import axios from "axios";
+import { format } from "timeago.js";
 
 export const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
+  const [like, setLike] = useState(post.likes.length);
+  const [isLiked, setisLiked] = useState(false);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fecthUser = async () => {
+      const res = await axios.get(`/api/users?userId=${post.userId}`);
+      setUser(res.data);
+    };
+    fecthUser();
+  }, [post.userId]);
 
   const liked = false;
+  const handleLikes = () => {
+    setLike(isLiked ? like - 1 : like + 1);
+    setisLiked(!isLiked);
+  };
 
   return (
     <div className="post">
       <div className="container">
         <div className="user">
           <div className="userInfo">
-            <img src={post.ProfilePic} alt="" />
-            <div className="details">
-              <Link
-                to={`/profile/${post.userId}`}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                <span className="name">{post.name}</span>
-              </Link>
-              <span className="date"> 1 min ago</span>
-            </div>
+            <Link
+              to={`/profile/${post.userId}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <div className="details">
+                <img src={user.ProfilePic || "/avatar.png"} alt="" />
+                <span className="name">{user.username}</span>
+              </div>
+            </Link>
+            <span className="date">{format(post.createdAt)}</span>
           </div>
         </div>
         <div className="content">
-          <p>{post.desc}</p>
-          <img src={post.img} alt="" />
+          <p>{post?.desc}</p>
+          <img src={post?.img} alt="" />
         </div>
         <div className="info">
           <div className="item">
-            {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-            12 Likes
+            {isLiked ? (
+              <FavoriteIcon onClick={handleLikes} />
+            ) : (
+              <FavoriteBorderIcon onClick={handleLikes} />
+            )}
+            {like}
           </div>
-          <div 
-            className="item"
-            onClick={() => setCommentOpen(!commentOpen)}
-          >
+          <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
             <ModeCommentOutlinedIcon />2 Comens
           </div>
           <div className="item">

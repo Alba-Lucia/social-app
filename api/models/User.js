@@ -23,13 +23,11 @@ const userSchema = new mongoose.Schema(
       max: 15,
     },
     profilePicture: {
-      url: String,
-      public_id: String,
+      type: String,
       default: "",
     },
     coverPicture: {
-      url: String,
-      public_id: String,
+      type: String,
       default: "",
     },
     followers: {

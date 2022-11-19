@@ -8,6 +8,9 @@ import { Home } from "../pages/home/Home";
 import { Login } from "../pages/login/Login";
 import { Profile } from "../pages/profile/Profile";
 import { Register } from "../pages/register/Register";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -49,9 +52,11 @@ function App() {
   ]);
 
   return (
-    <div>
-      <RouterProvider router={router} />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div>
+        <RouterProvider router={router} />
+      </div>
+    </QueryClientProvider>
   );
 }
 

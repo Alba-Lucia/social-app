@@ -18,25 +18,25 @@ export const createUser = async (req, res) => {
     const user = await newUser.save();
     res.status(200).json(user);
   } catch (error) {
-    // return res.status(500).json(error)
-    console.log(error)
+    return res.status(500).json(error)
+    // console.log(error)
   }
 };
 
 // LOGIN
 export const login = async (req, res) => {
-  try {
+  try { 
     // Validate Email
     const user = await User.findOne({email: req.body.email})
     !user && res.status(404).send("user no faund")
     
     // Validate Password
     const validPassword = await bcrypt.compare(req.body.password, user.password)
-    !validPassword && res.status(400).json("wrong password")
+    !validPassword && res.status(404).json("wrong password")
 
-    res.status(200).json(user)
+     res.status(200).json(user)
   } catch (error) {
-    return res.status(500).json(error)
+     res.status(500).json(error)
   }
 }
 

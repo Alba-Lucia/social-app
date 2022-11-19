@@ -1,88 +1,106 @@
 .register {
-    height: 100vh;
-    background-color: rgb(193, 190, 255);
+  height: 100vh;
+  background-color: rgb(193, 190, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 768px) {
+      height: 100%;
+      padding: 60px 0;
+  }
+
+  .card {
+    width: 50%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    .card {
-      width: 50%;
+    flex-direction: row-reverse;
+    background: white;
+    border-radius: 10px;
+    min-height: 600px;
+    overflow: hidden;
+    @media (max-width: 768px) {
+       width: 80%;
+       flex-direction: column;
+    }
+
+    .left {
+      flex: 1;
+      background: linear-gradient(
+          rgba(39, 11, 96, 0.603),
+          rgba(39, 11, 96, 0.773)
+        ),
+        url("https://images.pexels.com/photos/4353618/pexels-photo-4353618.jpeg?auto=compress&cs=tinysrgb&w=600")
+          center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding: 50px;
       display: flex;
-      flex-direction: row-reverse;
-      background: white;
-      border-radius: 10px;
-      min-height: 600px;
-      overflow: hidden;
-  
-      .left {
-        flex: 1;
-        background: linear-gradient(
-            rgba(39, 11, 96, 0.603),
-            rgba(39, 11, 96, 0.773)
-          ),
-          url("https://images.pexels.com/photos/4353618/pexels-photo-4353618.jpeg?auto=compress&cs=tinysrgb&w=600")
-            center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        padding: 50px;
+      flex-direction: column;
+      gap: 30px;
+      color: white;
+      @media (max-width: 768px) {
+       padding: 50px 30px;
+      }
+
+      h1 {
+        font-size: 100px;
+        line-height: 100px;
+        @media (max-width: 768px) {
+          font-size: 40px;
+          line-height: 40px;
+        }
+      }
+      p {
+      }
+      span {
+        font-size: 14px;
+      }
+      button {
+        width: 50%;
+        padding: 10px;
+        border: none;
+        background-color: white;
+        color: rebeccapurple;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+    .right {
+      flex: 1;
+      background-color: white;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      justify-content: center;
+      @media (max-width: 768px) {
+       padding: 50px 30px;
+       gap: 30px;
+      }
+
+      h2 {
+        color: #555;
+      }
+
+      form {
         display: flex;
         flex-direction: column;
-        gap: 30px;
-        color: white;
-  
-        h1 {
-          font-size: 100px;
-          line-height: 100px;
+        gap: 30;
+
+        input {
+          border: none;
+          border-bottom: 1px solid lightgray;
+          padding: 20px 10px;
         }
-        p {
-        }
-        span {
-          font-size: 14px;
-        }
+
         button {
           width: 50%;
           padding: 10px;
           border: none;
-          background-color: white;
-          color: rebeccapurple;
+          background-color: #938eef;
+          margin-top: 30px;
           font-weight: bold;
-          cursor: pointer;
-        }
-      }
-      .right {
-        flex: 1;
-        background-color: white;
-        padding: 50px;
-        display: flex;
-        flex-direction: column;
-        gap: 50px;
-        justify-content: center;
-  
-        h2 {
-          color: #555;
-        }
-  
-        form {
-          display: flex;
-          flex-direction: column;
-          gap: 30;
-  
-          input {
-            border: none;
-            border-bottom: 1px solid lightgray;
-            padding: 20px 10px;
-          }
-  
-          button {
-            width: 50%;
-            padding: 10px;
-            border: none;
-            background-color: #938eef;
-            margin-top: 30px;
-            font-weight: bold;
-          }
         }
       }
     }
   }
-  
+}

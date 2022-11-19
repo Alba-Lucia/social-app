@@ -9,12 +9,12 @@ const router = Router()
 
 // // Update user
 router.put('/:id', updateUser)
-
+ 
 // // Delete a user
 router.delete('/:id', deleteUser)
 
 // Get one user
-router.get('/:id', getUser)
+router.get('/', getUser) 
 
 // Follow a user
 router.put('/:id/follow', followUser)

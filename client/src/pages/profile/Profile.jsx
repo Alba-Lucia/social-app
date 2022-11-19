@@ -1,26 +1,37 @@
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import PinterestIcon from '@mui/icons-material/Pinterest';
-import PlaceIcon from '@mui/icons-material/Place';
-import LanguageIcon from '@mui/icons-material/Language';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import "./profile.scss"
-import { Posts } from '../../componets/posts/Posts';
+import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import PinterestIcon from "@mui/icons-material/Pinterest";
+import PlaceIcon from "@mui/icons-material/Place";
+import LanguageIcon from "@mui/icons-material/Language";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import "./profile.scss";
+import { Posts } from "../../componets/posts/Posts";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const Profile = () => {
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fecthUser = async () => {
+      const res = await axios.get(`/api/users?username=user4`);
+      setUser(res.data);
+    };
+    fecthUser();
+  }, []);
+
   return (
     <div className="profile">
       <div className="images">
-        <img
-          src="https://images.pexels.com/photos/13275217/pexels-photo-13275217.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        <img src={user.coverPicture || "https://images.pexels.com/photos/13275217/pexels-photo-13275217.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
           alt=""
           className="cover"
         />
-        <img
-          src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?cs=srgb&dl=pexels-guilherme-almeida-1858175.jpg&fm=jpg"
+        <img src={user.profilePicture || "https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?cs=srgb&dl=pexels-guilherme-almeida-1858175.jpg&fm=jpg"}
           alt=""
           className="profilePic"
         />
@@ -29,40 +40,39 @@ export const Profile = () => {
         <div className="uInfo">
           <div className="left">
             <a href="">
-              <FacebookOutlinedIcon fontSize='large'/>
+              <FacebookOutlinedIcon />
             </a>
             <a href="">
-              <InstagramIcon fontSize='large'/>
+              <InstagramIcon />
             </a>
             <a href="">
-              <TwitterIcon fontSize='large'/>
+              <TwitterIcon />
             </a>
             <a href="">
-              <LinkedInIcon fontSize='large'/>
+              <LinkedInIcon />
             </a>
-            
           </div>
           <div className="center">
-            <span>Alba</span>
+            <span>{user.username}</span>
             <div className="info">
               <div className="item">
-                <PlaceIcon fontSize='large'/>
-                <span>Colombia</span>
+                <PlaceIcon />
+                <span>{user.city ? user.city : "City"}</span>
               </div>
               <div className="item">
-                <LanguageIcon fontSize='large'/>
-                <span>Colombia</span>
+                <LanguageIcon />
+                <span>{user.from ? user.from : "Country"}</span>
               </div>
             </div>
-              <button>Follow</button>
           </div>
           <div className="right">
-            <MailOutlineIcon/>
-            <MoreVertIcon/>
+            <button className="button__primary-small">Follow</button>
+            <MailOutlineIcon />
+            <MoreVertIcon />
           </div>
         </div>
       </div>
-      <Posts/>
+      <Posts username="user4" />
     </div>
   );
 };
